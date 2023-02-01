@@ -1,26 +1,28 @@
-const express = require('express');
-const http = require('http');
-const socketIO = require('socket.io');
+const socket = io();
+const messageInput = document.getElementById('message-input');
+const usernameInput = document.getElementById('username-input');
+const submitButton = document.getElementById('submit-button');
+const messageContainer = document.getElementById('message-container');
 
-const app = express();
-const server = http.createServer(app);
-const io = socketIO(server);
+submitButton.addEventListener('click', () => {
+  const message = messageInput.value;
+  const username = usernameInput.value;
 
-app.use(express.static(`${__dirname}/public`));
-
-io.on('connection', (socket) => {
-  console.log('New user connected');
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
+  socket.emit('newMessage', {
+    username,
+    message,
   });
 
-  socket.on('newMessage', (message) => {
-    io.emit('newMessage', message);
-  });
+  messageInput.value = '';
 });
 
-const port = process.env.PORT || 3000;
-server.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+socket.on('newMessage', (message) => {
+  const newMessage = document.createElement('div');
+  newMessage.classList.add('message');
+  newMessage.innerHTML = `
+    <p class="username">${message.username}:</p>
+    <p>${message.message}</p>
+  `;
+  messageContainer.appendChild(newMessage);
+  messageContainer.scrollTop = messageContainer.scrollHeight;
 });
