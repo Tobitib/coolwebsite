@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chatroom</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <!-- Chatroom UI -->
-    <input id="username-input" type="text" placeholder="Username">
-    <input id="message-input" type="text" placeholder="Message">
-    <button id="submit-button">Submit</button>
-    <div id="message-container"></div>
-
-    <!-- Socket.io Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.esm.min.js"></script>
-    <script src="app.js"></script>
+    <h1>Chat Room</h1>
+    <div id="room-form">
+      <input type="text" id="room-name" placeholder="Enter Room Name">
+      <button id="create-room">Create Room</button>
+    </div>
+    <div id="chat-area"></div>
+    <input type="text" id="message" placeholder="Enter Message">
+    <button id="send-message">Send</button>
+    <script src="script.js"></script>
   </body>
 </html>
-
