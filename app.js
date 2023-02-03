@@ -1,28 +1,15 @@
-const socket = io();
-const messageInput = document.getElementById('message-input');
-const usernameInput = document.getElementById('username-input');
-const submitButton = document.getElementById('submit-button');
-const messageContainer = document.getElementById('message-container');
+const roomForm = document.getElementById("room-form");
+const roomName = document.getElementById("room-name");
+const chatArea = document.getElementById("chat-area");
+const message = document.getElementById("message");
+const sendMessage = document.getElementById("send-message");
 
-submitButton.addEventListener('click', () => {
-  const message = messageInput.value;
-  const username = usernameInput.value;
-
-  socket.emit('newMessage', {
-    username,
-    message,
-  });
-
-  messageInput.value = '';
+roomForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const room = roomName.value;
+  // create room code here
 });
 
-socket.on('newMessage', (message) => {
-  const newMessage = document.createElement('div');
-  newMessage.classList.add('message');
-  newMessage.innerHTML = `
-    <p class="username">${message.username}:</p>
-    <p>${message.message}</p>
-  `;
-  messageContainer.appendChild(newMessage);
-  messageContainer.scrollTop = messageContainer.scrollHeight;
+sendMessage.addEventListener("click", () => {
+  // send message code here
 });
